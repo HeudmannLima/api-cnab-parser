@@ -1,6 +1,6 @@
 # Desafio programação - para vaga desenvolvedor
 
-Por favor leiam este documento do começo ao fim, com muita atenção.
+Por favor leiam este documento do começo ao fim, com muita atenção. 
 O intuito deste teste é avaliar seus conhecimentos técnicos em programação.
 O teste consiste em parsear [este arquivo de texto(CNAB)](https://github.com/ByCodersTec/desafio-ruby-on-rails/blob/master/CNAB.txt) e salvar suas informações(transações financeiras) em uma base de dados a critério do candidato.
 Este desafio deve ser feito por você em sua casa. Gaste o tempo que você quiser, porém normalmente você não deve precisar de mais do que algumas horas.
