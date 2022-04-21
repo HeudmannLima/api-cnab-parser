@@ -1,6 +1,6 @@
-import { TransactionData } from '../../domain/entities/transactionData'
+import { TransactionData } from '@src/domain/entities/transactionData'
 
-export interface TransactionsRepository {
+export interface ITransactionsRepository {
   createTransactionsByCNABData(file: any): Promise <void>
   listAllTransactions(): Promise <TransactionData[]>
 }

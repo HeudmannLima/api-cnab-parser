@@ -1,18 +1,19 @@
-import { CNABdata } from '../../domain/entities/transactionData'
-import { TransactionsRepository } from '../repositories/ITransactionsRepository'
+import { ITransactionsRepository } from '../repositories/ITransactionsRepository'
+import { ReadBynaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBase64Provider'
 
-export type RegisterCNABTransactionsRequest = { 
-  cnabData: CNABdata
-}
-
-export class RegisterCNABTransactions {
+export class RegisterCNABTransactionsUsecase {
   constructor(
-    private transactionsRepository: TransactionsRepository
+    private transactionsRepository: ITransactionsRepository
   ) {}
+  
+  async execute(cnabData: string) {    
+    // this.transactionsRepository.createTransactionsByCNABData(cnabData) ///
+  
+    const handleBinaryData = new ReadBynaryProvider()
+    const data = await handleBinaryData.readBinaryDataToString(cnabData)
 
-  async execute(cnabs: RegisterCNABTransactionsRequest) {    
-    this.transactionsRepository.createTransactionsByCNABData(cnabs.cnabData)
-    
-    return
+    const dataArray = handleBinaryData.parseCNABTransacionData(data)
+
+    return dataArray
   }
 }

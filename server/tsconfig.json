@@ -1,28 +1,26 @@
-
 {
   "ts-node": {
-    "compilerOptions": {
-    "module": "commonjs"
-    }
+    "require": ["tsconfig-paths/register"]
   },
+  
   "compilerOptions": {
-    "lib": ["es2019"],
-    "removeComments": true,
-    "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "sourceMap": true,
-    "target": "es2019",
-    "outDir": "lib",
-    "inlineSources": true,
-    "esModuleInterop": true,
-    "sourceRoot": "/",
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "strict": true,
+    "typeRoots": ["./node_modules/@types"],
+    "strictPropertyInitialization": false,
     "baseUrl": "./",
+    "allowJs": true,
     "paths": {
       "@src/*": ["src/*"],
       "@tests/*": ["tests/*"]
     },
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "forceConsistentCasingInFileNames": true
   }
 }

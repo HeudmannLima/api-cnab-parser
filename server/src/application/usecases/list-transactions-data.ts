@@ -1,5 +1,5 @@
-import { CNABdata, TransactionData } from '../../domain/entities/transactionData'
-import { TransactionsRepository } from '../repositories/ITransactionsRepository'
+import { CNABdata } from '../../domain/entities/transactionData'
+// import { TransactionsRepository } from '../repositories/ITransactionsRepository'
 
 export type RegisterCNABTransactionsRequest = { 
   cnabData: CNABdata
@@ -7,12 +7,12 @@ export type RegisterCNABTransactionsRequest = {
 
 export class ListCNABTransactions {
   constructor(
-    private transactionsRepository: TransactionsRepository
+    // private transactionsRepository: TransactionsRepository
   ) {}
 
   async execute() {    
-    const transactions = this.transactionsRepository.listAllTransactions()
+    // const transactions = this.transactionsRepository.listAllTransactions()
 
-    return transactions
+    // return transactions
   }
 }

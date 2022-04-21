@@ -5,7 +5,7 @@ export type CNABdata = {
   date: string,
   amount: string,
   cpf: string,
-  cardNumber: string,
+  card: string,
   time: string,
   owner: string,
   client: string
