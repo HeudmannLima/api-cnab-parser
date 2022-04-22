@@ -7,7 +7,7 @@ export class RegisterCNABTransactionsUsecase {
   ) {}
   
   async execute(cnabData: string) {    
-    // this.transactionsRepository.createTransactionsByCNABData(cnabData) ///
+    this.transactionsRepository.createTransactionsByCNABData(cnabData)
   
     const handleBinaryData = new ReadBynaryProvider()
     const data = await handleBinaryData.readBinaryDataToString(cnabData)

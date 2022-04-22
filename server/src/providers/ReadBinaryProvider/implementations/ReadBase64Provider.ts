@@ -1,5 +1,5 @@
 import{ IReadBynaryProvider } from '@src/providers/ReadBinaryProvider/IReadBase64Provider';
-import { CNABdata, TransactionData } from "@src/domain/entities/transactionData"
+import { TransactionData } from "@src/domain/entities/transactionData"
 
 enum CNABDataPosition {
   TYPE = 1,

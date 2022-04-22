@@ -1,9 +1,12 @@
 import 'express-async-errors'
 import express, { NextFunction, Request, Response } from 'express'
 import cors from 'cors'
-import { AppError } from './errors/AppError'
 import routes from '@src/http/routes'
+import { AppError } from './errors/AppError'
+import dotenv from 'dotenv';
 
+
+dotenv.config()
 const app = express()
 
 app.use(cors())
@@ -24,5 +27,5 @@ app.use((err: Error, _request: Request, response: Response, _: NextFunction) => 
 })
 
 app.listen(3333, () => {
-  console.log(`[✔] Server Started on port ${process.env.PORT}}`)
+  console.log(`[✔] Server Started on port ${process.env.PORT}`)
 })
