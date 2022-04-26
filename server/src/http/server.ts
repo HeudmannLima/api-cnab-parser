@@ -3,10 +3,12 @@ import express, { NextFunction, Request, Response } from 'express'
 import cors from 'cors'
 import routes from '@src/http/routes'
 import { AppError } from './errors/AppError'
-import dotenv from 'dotenv';
-
+import loadDatabase from '@src/infrastructure/db/loadData'
+import dotenv from 'dotenv'
 
 dotenv.config()
+loadDatabase()
+
 const app = express()
 
 app.use(cors())

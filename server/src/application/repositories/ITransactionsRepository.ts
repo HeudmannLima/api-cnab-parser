@@ -1,6 +1,8 @@
-import { TransactionData } from '@src/domain/entities/transactionData'
+import { CNABdata, TransactionData } from '@src/domain/entities/transactionData'
 
 export interface ITransactionsRepository {
-  createTransactionsByCNABData(file: any): Promise <void>
-  listAllTransactions(): Promise <TransactionData[]>
+  registerTransactions(cnabArray: TransactionData[]): Promise<void>
+  listAllTransactions(): Promise<CNABdata[]>
+  listAllTransactionsByClient(client: string): Promise<CNABdata[]>
+  calculateCNABTransactions(clientTransactions: CNABdata[]): Number
 }
