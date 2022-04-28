@@ -1,4 +1,4 @@
-import { ITransactionsRepository } from '../repositories/ITransactionsRepository'
+import { ITransactionsRepository } from '@src/application/repositories/ITransactionsRepository'
 
 export class ListCNABTransactionsUsecase {
   constructor(

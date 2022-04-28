@@ -2,24 +2,24 @@ import { Request, Response } from 'express'
 import { RegisterCNABTransactionsUsecase } from '@src/application/usecases/register-transactions'
 import { TransactionsRepository } from '@src/application/http/repositories/TransactionsRepository'
 import { AppError } from '@src/http/errors/AppError'
-import { ListCNABTransactionsUsecase } from '../usecases/list-all-transactions'
-import { ListResumeCNABTransactionsUsecase } from '../usecases/list-resume-transactions'
-import { ReadBynaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBase64Provider'
-import { ListCNABTransactionsByClientUsecase } from '../usecases/list-transactions-by-client'
-import { ListResumeCNABTransactionsByClientUsecase } from '../usecases/list-resume-by-client'
+import { ListCNABTransactionsUsecase } from '@src/application/usecases/list-all-transactions'
+import { ListResumeCNABTransactionsUsecase } from '@src/application/usecases/list-all-resume-transactions'
+import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBase64Provider'
+import { ListCNABTransactionsByClientUsecase } from '@src/application/usecases/list-transactions-by-client'
+import { ListResumeCNABTransactionsByClientUsecase } from '@src/application/usecases/list-resume-by-client'
 
 export default class TransactionController {
 
   public async register(request: Request, response: Response): Promise<Response> {
     const { fileData } = request.body 
-    const registerTransaction = new RegisterCNABTransactionsUsecase(new TransactionsRepository(), new ReadBynaryProvider())
+    const registerTransaction = new RegisterCNABTransactionsUsecase(new TransactionsRepository(), new ReadBinaryProvider())
 
     try {
       await registerTransaction.execute(fileData)
 
       return response.status(200).json({ message: `CNAB Data saved with success.`});
     } catch (error) {
-      throw new AppError(`Error on registrer CNAB transactions.`)
+      throw new AppError(`Error on registrer CNAB transactions. ${error}`)
     }
   }
 
@@ -51,7 +51,7 @@ export default class TransactionController {
   public async listResume(_request: Request, response: Response): Promise<Response> {
     const transactionsRepository = new TransactionsRepository()
     const listAllTransaction = new ListCNABTransactionsUsecase(transactionsRepository)
-    const listResumeAllTransaction = new ListResumeCNABTransactionsUsecase(transactionsRepository)
+    const listResumeAllTransaction = new ListResumeCNABTransactionsUsecase(new ReadBinaryProvider())
 
     try {
       const allTransactions = await listAllTransaction.execute()
@@ -68,7 +68,7 @@ export default class TransactionController {
     
     const transactionsRepository = new TransactionsRepository()
     const listClientTransactions = new ListCNABTransactionsByClientUsecase(transactionsRepository)
-    const listClientResume = new ListResumeCNABTransactionsByClientUsecase(transactionsRepository)
+    const listClientResume = new ListResumeCNABTransactionsByClientUsecase(new ReadBinaryProvider())
 
     try {
       const clientCNABData = await listClientTransactions.execute(client)

@@ -1,9 +1,9 @@
-import { LoadPostgresDriver } from "./drivers/postgresDriver";
+import { LoadPostgresDriver } from "@src/infrastructure/db/drivers/postgresDriver"
+import { PoolClient } from "pg"
 
 export default async function loadDatabase() {
   LoadPostgresDriver.initialize()
-
-  const client = await LoadPostgresDriver.connectToDB()
+  const client: PoolClient | undefined = await LoadPostgresDriver.connectToDB()
 
   const sql = `CREATE TABLE IF NOT EXISTS transactions (
     id UUID NOT NULL,
@@ -17,5 +17,5 @@ export default async function loadDatabase() {
     client VARCHAR(19) NOT NULL
   );`
 
-  return await client.query(sql)
+  return await client!.query(sql)
 }

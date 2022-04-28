@@ -1,18 +1,17 @@
-import { CNABdata } from '@src/domain/entities/transactionData'
-import { ITransactionsRepository } from '../repositories/ITransactionsRepository'
+import { CNABdata, ResumeData } from '@src/domain/entities/transactionData'
+import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBase64Provider'
 
 export class ListResumeCNABTransactionsByClientUsecase {
   constructor(
-    private transactionsRepository: ITransactionsRepository
+    private readBinaryProvider: ReadBinaryProvider
   ) {}
 
   async execute(clientTransactionsData: CNABdata[]) {
-    const clientData = {
-      totalAmount: Number
-    }
-
-    const totalAmount = this.transactionsRepository.calculateCNABTransactions(clientTransactionsData)
-    clientData[clientTransactionsData[0].client] = { totalAmount }
+    const { client } = clientTransactionsData[0]
+    const clientData: ResumeData = {}
+    
+    const totalAmount = this.readBinaryProvider.calculateCNABTransactions(clientTransactionsData)
+    clientData[client] = { totalAmount }
 
     return clientData
   }

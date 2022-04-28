@@ -1,8 +1,8 @@
 import 'express-async-errors'
+import { AppError } from '@src/http/errors/AppError'
 import express, { NextFunction, Request, Response } from 'express'
 import cors from 'cors'
 import routes from '@src/http/routes'
-import { AppError } from './errors/AppError'
 import loadDatabase from '@src/infrastructure/db/loadData'
 import dotenv from 'dotenv'
 

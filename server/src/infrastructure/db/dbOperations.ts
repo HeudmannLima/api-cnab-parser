@@ -1,6 +1,6 @@
 import { CNABdata, TransactionData } from "@src/domain/entities/transactionData"
+import { LoadPostgresDriver } from "@src/infrastructure/db/drivers/postgresDriver"
 import { PoolClient, QueryResult } from "pg"
-import { LoadPostgresDriver } from "./drivers/postgresDriver"
 
 export class DbOperations {
 
@@ -9,46 +9,46 @@ export class DbOperations {
   }
 
   async selectAllCNABs(): Promise<CNABdata[]> {
-    let result: QueryResult<CNABdata>    
-    const client: PoolClient = await LoadPostgresDriver.connectToDB()
+    let result: QueryResult<CNABdata> = {} as any
+    const client: PoolClient | undefined = await LoadPostgresDriver.connectToDB()
 
     try {
       const sql = `SELECT * FROM transactions`
-      result = await client.query(sql)
+      result = await client!.query(sql)
 
     } catch (err) {
       console.warn("Transaction error: ", err)
 
     } finally {
-      client.release()
+      client!.release()
     }
 
     return result.rows
   }
 
   async selectCNABsByClient(clientName: string): Promise<CNABdata[]> {
-    let result: QueryResult<CNABdata>
-    const client: PoolClient = await LoadPostgresDriver.connectToDB()
+    let result: QueryResult<CNABdata> = {} as any
+    const client: PoolClient | undefined = await LoadPostgresDriver.connectToDB()
 
     try {
       const sql = `SELECT * FROM transactions WHERE client = $1;`
-      result = await client.query(sql, [clientName])
+      result = await client!.query(sql, [clientName])
 
     } catch (err) {
       console.warn("Transaction error: ", err)
 
     } finally {
-      client.release()
+      client!.release()
     }
 
     return result.rows
   }
 
   async insertCNABDataArray(cnabArray: TransactionData[]) {    
-    const client: PoolClient = await LoadPostgresDriver.connectToDB()
+    const client: PoolClient | undefined = await LoadPostgresDriver.connectToDB()
   
     try {
-      await client.query("BEGIN")
+      await client!.query("BEGIN")
   
       try {
         const sql= `INSERT INTO transactions (
@@ -71,24 +71,23 @@ export class DbOperations {
             props.client
           ]
 
-          client.query(sql, values, (err, _result) => {
+          client!.query(sql, values, (err, _result) => {
             if (err) {              
-              client.query("ROLLBACK")
+              client!.query("ROLLBACK")
               console.warn("Transaction ROLLBACK called - Error: ", err)
             } else {
-              client.query("COMMIT")
+              client!.query("COMMIT")
             }
           })
         }
 
       } catch (err) {
-        client.query("ROLLBACK")
+        client!.query("ROLLBACK")
         console.warn("Transaction ROLLBACK called - Error: ", err)
       }
   
     } finally {
-      client.release()
+      client!.release()
     }
   }
-
 }

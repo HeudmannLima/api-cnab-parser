@@ -10,8 +10,7 @@
     "baseUrl": "./",
     "allowJs": true,
     "paths": {
-      "@src/*": ["src/*"],
-      "@tests/*": ["tests/*"]
+      "@src/*": ["src/*"]
     },
     "skipLibCheck": true,
     "esModuleInterop": true,

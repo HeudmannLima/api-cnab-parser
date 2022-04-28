@@ -1,4 +1,4 @@
-import { Entity } from "../../core/domain/Entity"
+import { Entity } from "@src/core/domain/Entity"
 
 export enum TransactionsType {
   DEBIT = "1",
@@ -22,6 +22,12 @@ export type CNABdata = {
   time: string,
   owner: string,
   client: string
+}
+
+export interface ResumeData {
+  [key: string]: {
+    totalAmount: Number
+  }
 }
 
 export class TransactionData extends Entity<CNABdata> {
