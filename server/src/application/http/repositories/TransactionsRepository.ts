@@ -7,7 +7,7 @@ export class TransactionsRepository implements ITransactionsRepository {
   async registerTransactions(cnabArray: TransactionData[]): Promise<CNABdata[]> {
     const db = new DbOperations()
     await db.insertCNABDataArray(cnabArray)
-    const emptyCNAB = {} as any
+    const emptyCNAB: any = {}
     
     return emptyCNAB
   }

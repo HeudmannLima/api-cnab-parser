@@ -1,0 +1,58 @@
+components:
+  schemas:
+    RegisterRequest:
+      type: object
+      properties:
+        fileData:
+          type: string
+          example: "MzIwMTkwMzAxMDAwMDAxNDIwMDA5NjIwNjc2MDE3NDc1MyoqKiozMTUzMTUzNDUzSk/Dg08gTUFDRURPICAgQkFSIERPIEpPw4NPICAgICAgIAo1MjAxOTAzMDEwMDAwMDEzMjAwNTU2NDE4MTUwNjMzMTIzKioqKjc2ODcxNDU2MDdNQVJJQSBKT1NFRklOQUxPSkEgRE8gw5MgLSBNQVRSSVoKMzIwMTkwMzAxMDAwMDAxMjIwMDg0NTE1MjU0MDczNjc3NyoqKioxMzEzMTcyNzEyTUFSQ09TIFBFUkVJUkFNRVJDQURPIERBIEFWRU5JREEKMjIwMTkwMzAxMDAwMDAxMTIwMDA5NjIwNjc2MDE3MzY0OCoqKiowMDk5MjM0MjM0Sk/Dg08gTUFDRURPICAgQkFSIERPIEpPw4NPICAgICAgIAoxMjAxOTAzMDEwMDAwMDE1MjAwMDk2MjA2NzYwMTcxMjM0KioqKjc4OTAyMzMwMDBKT8ODTyBNQUNFRE8gICBCQVIgRE8gSk/Dg08gICAgICAgCjIyMDE5MDMwMTAwMDAwMTA3MDA4NDUxNTI1NDA3Mzg3MjMqKioqOTk4NzEyMzMzM01BUkNPUyBQRVJFSVJBTUVSQ0FETyBEQSBBVkVOSURBCjIyMDE5MDMwMTAwMDAwNTAyMDA4NDUxNTI1NDA3Mzg0NzMqKioqMTIzMTIzMTIzM01BUkNPUyBQRVJFSVJBTUVSQ0FETyBEQSBBVkVOSURBCjMyMDE5MDMwMTAwMDAwNjAyMDAyMzI3MDI5ODA1NjY3NzcqKioqMTMxMzE3MjcxMkpPU8OJIENPU1RBICAgIE1FUkNFQVJJQSAzIElSTcODT1MKMTIwMTkwMzAxMDAwMDAyMDAwMDU1NjQxODE1MDYzMTIzNCoqKiozMzI0MDkwMDAyTUFSSUEgSk9TRUZJTkFMT0pBIERPIMOTIC0gTUFUUklaCjUyMDE5MDMwMTAwMDAwODAyMDA4NDUxNTI1NDA3MzMxMjMqKioqNzY4NzE0NTYwN01BUkNPUyBQRVJFSVJBTUVSQ0FETyBEQSBBVkVOSURBCjIyMDE5MDMwMTAwMDAwMTAyMDAyMzI3MDI5ODA1Njg0NzMqKioqMTIzMTIzMTIzM0pPU8OJIENPU1RBICAgIE1FUkNFQVJJQSAzIElSTcODT1MKMzIwMTkwMzAxMDAwMDYxMDIwMDIzMjcwMjk4MDU2Njc3NyoqKioxMzEzMTcyNzEySk9Tw4kgQ09TVEEgICAgTUVSQ0VBUklBIDMgSVJNw4NPUwo0MjAxOTAzMDEwMDAwMDE1MjMyNTU2NDE4MTUwNjMxMjM0KioqKjY2NzgxMDAwMDBNQVJJQSBKT1NFRklOQUxPSkEgRE8gw5MgLSBGSUxJQUwKODIwMTkwMzAxMDAwMDAxMDIwMzg0NTE1MjU0MDczMjM0NCoqKioxMjIyMTIzMjIyTUFSQ09TIFBFUkVJUkFNRVJDQURPIERBIEFWRU5JREEKMzIwMTkwMzAxMDAwMDAxMDMwMDIzMjcwMjk4MDU2Njc3NyoqKioxMzEzMTcyNzEySk9Tw4kgQ09TVEEgICAgTUVSQ0VBUklBIDMgSVJNw4NPUwo5MjAxOTAzMDEwMDAwMDEwMjAwNTU2NDE4MTUwNjM2MjI4KioqKjkwOTAwMDAwMDBNQVJJQSBKT1NFRklOQUxPSkEgRE8gw5MgLSBNQVRSSVoKNDIwMTkwNjAxMDAwMDA1MDYxNzg0NTE1MjU0MDczMTIzNCoqKioyMjMxMTAwMDAwTUFSQ09TIFBFUkVJUkFNRVJDQURPIERBIEFWRU5JREEKMjIwMTkwMzAxMDAwMDAxMDkwMDIzMjcwMjk4MDU2ODcyMyoqKio5OTg3MTIzMzMzSk9Tw4kgQ09TVEEgICAgTUVSQ0VBUklBIDMgSVJNw4NPUwo4MjAxOTAzMDEwMDAwMDAwMjAwODQ1MTUyNTQwNzMyMzQ0KioqKjEyMjIxMjMyMjJNQVJDT1MgUEVSRUlSQU1FUkNBRE8gREEgQVZFTklEQQoyMjAxOTAzMDEwMDAwMDAwNTAwMjMyNzAyOTgwNTY3Njc3KioqKjg3NzgxNDE4MDhKT1PDiSBDT1NUQSAgICBNRVJDRUFSSUEgMyBJUk3Dg09TCjMyMDE5MDMwMTAwMDAwMTkyMDA4NDUxNTI1NDA3MzY3NzcqKioqMTMxMzE3MjcxMk1BUkNPUyBQRVJFSVJBTUVSQ0FETyBEQSBBVkVOSURBCg=="
+
+    ListTransactionsResponse:
+      type: object
+      properties:
+        message:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                default: 2e173e62-c98c-4589-ac04-1ad2fac535ca
+              type:
+                type: string
+                default: 1
+              date:
+                type: string
+                default: 20190301
+              amount:
+                type: number
+                default: 142
+              cpf:
+                type: string
+                default: 09620676017
+              card:
+                type: string
+                default: 4753****3153
+              time:
+                type: string
+                default: 153453
+              owner:
+                type: string
+                default: JOÃO MACEDO
+              client:
+                type: string
+                default: BAR DO JOÃO
+
+    ListResumeTransactionsResponse:
+      type: object
+      properties:
+        message:
+          type: object
+          properties:
+            client:
+              type: object
+              properties:
+                totalAmount:
+                  type: number
+                  default: 1500.40
+

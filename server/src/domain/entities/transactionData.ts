@@ -1,26 +1,26 @@
-import { Entity } from "@src/core/domain/Entity"
+import { Entity } from '@src/core/domain/Entity'
 
 export enum TransactionsType {
-  DEBIT = "1",
-  TICKET = "2",
-  FINANCING = "3",
-  CREDIT = "4",
-  LOAN = "5",
-  SALES = "6",
-  TED = "7",
-  DOC = "8",
-  RENT = "9"
+  DEBIT = '1',
+  TICKET = '2',
+  FINANCING = '3',
+  CREDIT = '4',
+  LOAN = '5',
+  SALES = '6',
+  TED = '7',
+  DOC = '8',
+  RENT = '9'
 }
 
-export type CNABdata = {
-  id?: string,
-  type: string,
-  date: string,
-  amount: number,
-  cpf: string,
-  card: string,
-  time: string,
-  owner: string,
+export class CNABdata {
+  id?: string
+  type: string
+  date: string
+  amount: number
+  cpf: string
+  card: string
+  time: string
+  owner: string
   client: string
 }
 

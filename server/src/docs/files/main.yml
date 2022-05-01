@@ -1,0 +1,170 @@
+/transactions/register:
+  post:
+    tags:
+    - Register CNAB transactions
+    summary: Register
+    description: Register all CNAB transactions by a Base64 string data
+    parameters:
+    - in: body
+      name: fileData
+      description: Base64 string
+      required: true
+      schema:
+        $ref: '#/components/schemas/RegisterRequest'
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  default: CNAB Data saved with success.
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  default: Error on registrer CNAB transactions.
+      500:
+        description: Error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/500InternalServerError'
+
+/transactions/list:
+  get:
+    tags:
+    - List CNAB transactions
+    summary: List all
+    description: List all registered transactions
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTransactionsResponse'
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  default: Error on list all CNAB transactions.
+      500:
+        description: Error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/500InternalServerError'
+
+/transactions/list/{client}:
+  get:
+    tags:
+    - List CNAB transactions
+    summary: List by client
+    description: List transactions by client name
+    parameters:
+      - name: client
+        required: true
+        in: path
+        description: Client name
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTransactionsResponse'
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  default: Error on list client CNAB transactions.
+      500:
+        description: Error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/500InternalServerError'
+
+/transactions/resume:
+  get:
+    tags:
+    - List Resume transactions
+    summary: List all
+    description: List all resume transactions
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListResumeTransactionsResponse'
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  default: Error on list resume all CNAB transactions.
+      500:
+        description: Error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/500InternalServerError'
+
+/transactions/resume/{client}:
+  get:
+    tags:
+    - List Resume transactions
+    summary: List by client
+    description: List resume transactions by client name
+    parameters:
+      - name: client
+        required: true
+        in: path
+        description: Client name
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListResumeTransactionsResponse'
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  default: Error on resume client transactions.
+      500:
+        description: Error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/500InternalServerError'

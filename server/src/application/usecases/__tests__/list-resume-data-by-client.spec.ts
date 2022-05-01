@@ -1,22 +1,22 @@
 import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBase64Provider'
 import { InMemoryTransactionsRepository } from '@src/tests/repositories/in-memory-transactions-repository'
-import { ListResumeCNABTransactionsUsecase } from '@src/application/usecases/list-all-resume-transactions'
-import { ListCNABTransactionsUsecase } from '@src/application/usecases/list-all-transactions'
+import { ListResumeCNABTransactionsByClientUsecase } from '@src/application/usecases/list-resume-by-client'
+import { ListCNABTransactionsByClientUsecase } from '@src/application/usecases/list-transactions-by-client'
 import { RegisterCNABTransactionsUsecase } from '@src/application/usecases/register-transactions'
 
 let registerUsecase: RegisterCNABTransactionsUsecase
-let listUsecase: ListCNABTransactionsUsecase
-let listResumeUsecase: ListResumeCNABTransactionsUsecase
+let listByClientUsecase: ListCNABTransactionsByClientUsecase
 let readBinaryProvider: ReadBinaryProvider
 let inMemoryTransactionsRepository: InMemoryTransactionsRepository
+let listResumeByClientUsecase: ListResumeCNABTransactionsByClientUsecase
 
-describe('List resume transactions', () => {
+describe('List resume transactions by client', () => {
   beforeEach(() => {
     readBinaryProvider = new ReadBinaryProvider()
     inMemoryTransactionsRepository = new InMemoryTransactionsRepository()
 
-    listUsecase = new ListCNABTransactionsUsecase(inMemoryTransactionsRepository)
-    listResumeUsecase = new ListResumeCNABTransactionsUsecase(readBinaryProvider)
+    listByClientUsecase = new ListCNABTransactionsByClientUsecase(inMemoryTransactionsRepository)
+    listResumeByClientUsecase = new ListResumeCNABTransactionsByClientUsecase(readBinaryProvider)
 
     registerUsecase = new RegisterCNABTransactionsUsecase(
       inMemoryTransactionsRepository, 
@@ -32,20 +32,14 @@ describe('List resume transactions', () => {
     '7201903010000025000232702980568473****1231231233JOSÉ COSTA    MERCEARIA 3 IRMÃOS\n'+
     '3201903010000050000232702980568473****1231231233JOSÉ COSTA    MERCEARIA 3 IRMÃOS'
 
-  it('should be able to list all clients resume transactions', async () => {
+  it('should be able to show specific client resume transactions by client name', async () => {
 
     jest.spyOn(readBinaryProvider, 'readBinaryDataToString').mockImplementationOnce(() => mockedCNABData)
     await registerUsecase.execute(mockedCNABData)
 
-    const allTransactionsList = await listUsecase.execute()
-    const allResumeTransactions = await listResumeUsecase.execute(allTransactionsList)
+    const allClientTransactions = await listByClientUsecase.execute('MERCEARIA 3 IRMÃOS')
+    const clientResume = await listResumeByClientUsecase.execute(allClientTransactions)
 
-    expect(allResumeTransactions).toEqual(
-      expect.objectContaining({
-        'LOJA DO Ó - MATRIZ': { totalAmount: 50 },
-        'MERCADO DA AVENIDA': { totalAmount: 100 },
-        'MERCEARIA 3 IRMÃOS': { totalAmount: -250 }
-      })
-    )
+    expect(clientResume['MERCEARIA 3 IRMÃOS'].totalAmount).toBe(-250)
   })
 })

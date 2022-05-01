@@ -14,10 +14,11 @@ enum CNABDataPosition {
 }
 
 export class ReadBinaryProvider implements IReadBinaryProvider {
-  async readBinaryDataToString(fileData: string): Promise<string> {
+
+  readBinaryDataToString(fileData: string): string {
 
     if (!Utils.validateBase64String(fileData)) {
-      throw Error("Base64 string is not valid.")
+      throw Error('Base64 string is not valid.')
     }
 
     const fileBufferData = Buffer.from(fileData, 'base64')

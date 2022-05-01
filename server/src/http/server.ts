@@ -5,10 +5,12 @@ import cors from 'cors'
 import routes from '@src/http/routes'
 import loadDatabase from '@src/infrastructure/db/loadData'
 import dotenv from 'dotenv'
+import { swaggerDocs } from '@src/docs/swagger'
 
 dotenv.config()
 loadDatabase()
 
+const port = Number(process.env.PORT)
 const app = express()
 
 app.use(cors())
@@ -23,11 +25,11 @@ app.use((err: Error, _request: Request, response: Response, _: NextFunction) => 
   }
 
   return response.status(500).json({
-    status: 'error',
     message: 'Internal Server Error',
   })
 })
 
-app.listen(3333, () => {
-  console.log(`[✔] Server Started on port ${process.env.PORT}`)
+app.listen(port, () => {
+  console.warn(`\n[✔] Server Started on port ${port}`)
+  swaggerDocs(app, port)
 })

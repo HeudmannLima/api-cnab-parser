@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'
 import { RegisterCNABTransactionsUsecase } from '@src/application/usecases/register-transactions'
 import { TransactionsRepository } from '@src/application/http/repositories/TransactionsRepository'
-import { AppError } from '@src/http/errors/AppError'
 import { ListCNABTransactionsUsecase } from '@src/application/usecases/list-all-transactions'
 import { ListResumeCNABTransactionsUsecase } from '@src/application/usecases/list-all-resume-transactions'
 import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBase64Provider'
 import { ListCNABTransactionsByClientUsecase } from '@src/application/usecases/list-transactions-by-client'
 import { ListResumeCNABTransactionsByClientUsecase } from '@src/application/usecases/list-resume-by-client'
+import { AppError } from '@src/http/errors/AppError'
 
 export default class TransactionController {
 
@@ -49,8 +49,7 @@ export default class TransactionController {
   }
 
   public async listResume(_request: Request, response: Response): Promise<Response> {
-    const transactionsRepository = new TransactionsRepository()
-    const listAllTransaction = new ListCNABTransactionsUsecase(transactionsRepository)
+    const listAllTransaction = new ListCNABTransactionsUsecase(new TransactionsRepository())
     const listResumeAllTransaction = new ListResumeCNABTransactionsUsecase(new ReadBinaryProvider())
 
     try {
@@ -65,9 +64,7 @@ export default class TransactionController {
 
   public async listResumeByClient(request: Request, response: Response): Promise<Response> {
     const { client } = request.params
-    
-    const transactionsRepository = new TransactionsRepository()
-    const listClientTransactions = new ListCNABTransactionsByClientUsecase(transactionsRepository)
+    const listClientTransactions = new ListCNABTransactionsByClientUsecase(new TransactionsRepository())
     const listClientResume = new ListResumeCNABTransactionsByClientUsecase(new ReadBinaryProvider())
 
     try {

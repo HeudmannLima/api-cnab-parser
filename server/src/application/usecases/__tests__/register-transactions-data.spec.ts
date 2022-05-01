@@ -20,7 +20,7 @@ describe('Register transactions', () => {
   it('should be able to create a single CNAB transaction', async () => {
     const mockedCNABData = '2201903010000010200232702980568473****1231231233JOSÉ COSTA    MERCEARIA 3 IRMÃOS'
 
-    jest.spyOn(readBinaryProvider, 'readBinaryDataToString').mockImplementationOnce(async () => mockedCNABData)
+    jest.spyOn(readBinaryProvider, 'readBinaryDataToString').mockImplementationOnce(() => mockedCNABData)
     const transactionArray = await registerUsecase.execute(mockedCNABData)
     const [singleTransactionObj] = transactionArray
 
@@ -39,7 +39,7 @@ describe('Register transactions', () => {
       '5201903010000080200845152540733123****7687145607MARCOS PEREIRAMERCADO DA AVENIDA\n'+
       '2201903010000010200232702980568473****1231231233JOSÉ COSTA    MERCEARIA 3 IRMÃOS'
 
-    jest.spyOn(readBinaryProvider, 'readBinaryDataToString').mockImplementationOnce(async () => mockedCNABData)
+    jest.spyOn(readBinaryProvider, 'readBinaryDataToString').mockImplementationOnce(() => mockedCNABData)
     const transactionArray = await registerUsecase.execute(mockedCNABData)
 
     expect(transactionArray).toEqual(

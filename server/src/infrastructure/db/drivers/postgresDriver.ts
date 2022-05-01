@@ -19,11 +19,11 @@ export class LoadPostgresDriver {
     new LoadPostgresDriver()
   }
 
-  static connectToDB = async (): Promise<PoolClient | undefined> => {
+  static async connectToDB(): Promise<PoolClient | undefined> {
     try {
       return await this.POOL.connect()
     } catch (err) {
-      console.log(err)
+      console.warn(err)
     }
   }
 }

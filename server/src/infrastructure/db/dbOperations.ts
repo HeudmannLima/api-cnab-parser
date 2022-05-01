@@ -1,6 +1,6 @@
-import { CNABdata, TransactionData } from "@src/domain/entities/transactionData"
-import { LoadPostgresDriver } from "@src/infrastructure/db/drivers/postgresDriver"
-import { PoolClient, QueryResult } from "pg"
+import { CNABdata, TransactionData } from '@src/domain/entities/transactionData'
+import { LoadPostgresDriver } from '@src/infrastructure/db/drivers/postgresDriver'
+import { PoolClient, QueryResult } from 'pg'
 
 export class DbOperations {
 
@@ -17,7 +17,7 @@ export class DbOperations {
       result = await client!.query(sql)
 
     } catch (err) {
-      console.warn("Transaction error: ", err)
+      console.warn(`Transaction error: `, err)
 
     } finally {
       client!.release()
@@ -35,7 +35,7 @@ export class DbOperations {
       result = await client!.query(sql, [clientName])
 
     } catch (err) {
-      console.warn("Transaction error: ", err)
+      console.warn(`Transaction error: `, err)
 
     } finally {
       client!.release()
@@ -48,7 +48,7 @@ export class DbOperations {
     const client: PoolClient | undefined = await LoadPostgresDriver.connectToDB()
   
     try {
-      await client!.query("BEGIN")
+      await client!.query(`BEGIN`)
   
       try {
         const sql= `INSERT INTO transactions (
@@ -73,17 +73,17 @@ export class DbOperations {
 
           client!.query(sql, values, (err, _result) => {
             if (err) {              
-              client!.query("ROLLBACK")
-              console.warn("Transaction ROLLBACK called - Error: ", err)
+              client!.query(`ROLLBACK`)
+              console.warn(`Transaction ROLLBACK called - Error: `, err)
             } else {
-              client!.query("COMMIT")
+              client!.query(`COMMIT`)
             }
           })
         }
 
       } catch (err) {
-        client!.query("ROLLBACK")
-        console.warn("Transaction ROLLBACK called - Error: ", err)
+        client!.query(`ROLLBACK`)
+        console.warn(`Transaction ROLLBACK called - Error: `, err)
       }
   
     } finally {

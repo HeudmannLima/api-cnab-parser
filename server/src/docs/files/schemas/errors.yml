@@ -1,0 +1,8 @@
+components:
+  schemas:
+    500InternalServerError:
+      type: object
+      properties:
+        message:
+          type: string
+          default: Internal Server Error

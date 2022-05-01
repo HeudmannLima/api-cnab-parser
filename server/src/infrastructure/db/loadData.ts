@@ -1,5 +1,5 @@
-import { LoadPostgresDriver } from "@src/infrastructure/db/drivers/postgresDriver"
-import { PoolClient } from "pg"
+import { LoadPostgresDriver } from '@src/infrastructure/db/drivers/postgresDriver'
+import { PoolClient } from 'pg'
 
 export default async function loadDatabase() {
   LoadPostgresDriver.initialize()
