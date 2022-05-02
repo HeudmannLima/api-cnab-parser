@@ -1,5 +1,5 @@
 import { CNABdata, ResumeData } from '@src/domain/entities/transactionData'
-import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBase64Provider'
+import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBinaryProvider'
 
 export class ListResumeCNABTransactionsByClientUsecase {
   constructor(

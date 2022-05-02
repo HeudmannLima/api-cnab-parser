@@ -1,4 +1,4 @@
-import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBase64Provider'
+import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBinaryProvider'
 import { InMemoryTransactionsRepository } from '@src/tests/repositories/in-memory-transactions-repository'
 import { RegisterCNABTransactionsUsecase } from '@src/application/usecases/register-transactions'
 
@@ -15,6 +15,18 @@ describe('Register transactions', () => {
       inMemoryTransactionsRepository, 
       readBinaryProvider
     )
+  })
+
+  it('should not be able to create a CNAB with an invalid base64 string data', async () => {
+    const mockedBase64data = 'Co\qKioMjM\0MjM0Sk/.Dg08gTUFDRURPICPIEpPw4NPICAgICAgIAoxMjA\dCoqKiowMDk5CAgQ.kFSI'
+
+    try {
+      await registerUsecase.execute(mockedBase64data)
+
+    } catch (error) {      
+      expect(error).toBeInstanceOf(Error)
+      expect(error).toHaveProperty('message', 'Base64 string is not valid.');
+    }
   })
 
   it('should be able to create a single CNAB transaction', async () => {

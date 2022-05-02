@@ -1,5 +1,6 @@
-import{ IReadBinaryProvider } from '@src/providers/ReadBinaryProvider/IReadBase64Provider'
+import{ IReadBinaryProvider } from '@src/providers/ReadBinaryProvider/IReadBinaryProvider'
 import { CNABdata, TransactionData, TransactionsType as Type } from '@src/domain/entities/transactionData'
+import { readFileSync, unlinkSync, statSync } from 'fs'
 import { Utils } from '@src/infrastructure/utils'
 
 enum CNABDataPosition {
@@ -16,7 +17,6 @@ enum CNABDataPosition {
 export class ReadBinaryProvider implements IReadBinaryProvider {
 
   readBinaryDataToString(fileData: string): string {
-
     if (!Utils.validateBase64String(fileData)) {
       throw Error('Base64 string is not valid.')
     }
@@ -25,6 +25,24 @@ export class ReadBinaryProvider implements IReadBinaryProvider {
     const content = fileBufferData.toString('utf8')
 
     return content
+  }
+
+  async readBinaryUploadedFileToString(uploadedFilePath: string): Promise<string> {
+    let data: string
+
+    try {
+      data = Buffer.from(readFileSync(uploadedFilePath)).toString('base64')
+
+    } catch (error) {
+      throw Error(`Error on process CNAB file: ${error}`)
+
+    } finally {
+      if ((await Utils.exists(uploadedFilePath))) {
+        unlinkSync(uploadedFilePath)
+      }
+    }
+
+    return data
   }
 
   normalizeCNABAmountdata(amount: number): number {
@@ -39,7 +57,7 @@ export class ReadBinaryProvider implements IReadBinaryProvider {
 
   parseCNABTransacionData(data: string): TransactionData[] {
     const splittedData = this.splitDataToArray(data)
-    const transactionDataArrr: TransactionData[] = []
+    const transactionDataArr: TransactionData[] = []
 
     for (const line of splittedData) {
       const cnabObj: any = {}
@@ -48,7 +66,7 @@ export class ReadBinaryProvider implements IReadBinaryProvider {
       let from = 0
 
       for (const [data, pos] of cnabProps) {
-        let value = data.toLowerCase()
+        const value = data.toLowerCase()
         const to = Number(pos.toString())
 
         cnabObj[value] = line.slice(from, to).trim()
@@ -61,10 +79,10 @@ export class ReadBinaryProvider implements IReadBinaryProvider {
       }
 
       const transaction = TransactionData.create(cnabObj)
-      transactionDataArrr.push(transaction)
+      transactionDataArr.push(transaction)
     }
 
-    return transactionDataArrr
+    return transactionDataArr
   }
 
   public calculateCNABTransactions(clientTransactions: CNABdata[]): Number {

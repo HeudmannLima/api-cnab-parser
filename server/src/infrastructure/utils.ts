@@ -1,3 +1,5 @@
+import { PathLike } from 'fs'
+import { access } from 'fs/promises'
 export class Utils {
 
   static validateBase64String(fileData: string): boolean {
@@ -10,5 +12,12 @@ export class Utils {
     return true
   }
 
-
+  static async exists(path: PathLike) {  
+    try {
+      await access(path)
+      return true
+    } catch {
+      return false
+    }
+  }
 }

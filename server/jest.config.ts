@@ -1,7 +1,7 @@
 module.exports = {
   collectCoverageFrom: [
     'src/tests/repositories/in-memory-transactions-repository.ts',
-    'src/providers/ReadBinaryProvider/implementations/ReadBase64Provider.ts',
+    'src/providers/ReadBinaryProvider/implementations/ReadBinaryProvider.ts',
     'src/application/usecases/*.ts',
   ],
   clearMocks: true,

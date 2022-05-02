@@ -1,4 +1,6 @@
 import { Router } from 'express'
+import multer from 'multer'
+
 import TransactionsController from '@src/application/controllers/TransactionController'
 
 const transactionsRouter = Router()
@@ -9,5 +11,10 @@ transactionsRouter.get('/list/:client', transactionsController.listTransactionsB
 transactionsRouter.get('/resume', transactionsController.listResume)
 transactionsRouter.get('/resume/:client', transactionsController.listResumeByClient)
 transactionsRouter.post('/register', transactionsController.register)
+transactionsRouter.post(
+  '/register/file', 
+  multer({ dest: './'}).single('file'), 
+  transactionsController.registerFile
+)
 
 export default transactionsRouter

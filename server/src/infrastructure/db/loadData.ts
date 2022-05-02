@@ -17,5 +17,5 @@ export default async function loadDatabase() {
     client VARCHAR(19) NOT NULL
   );`
 
-  return await client!.query(sql)
+  return await client.query(sql)
 }

@@ -1,4 +1,4 @@
-import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBase64Provider'
+import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBinaryProvider'
 import { InMemoryTransactionsRepository } from '@src/tests/repositories/in-memory-transactions-repository'
 import { ListCNABTransactionsByClientUsecase } from '@src/application/usecases/list-transactions-by-client'
 import { RegisterCNABTransactionsUsecase } from '@src/application/usecases/register-transactions'
@@ -12,7 +12,7 @@ describe('List transactions by client', () => {
   beforeEach(() => {
     readBinaryProvider = new ReadBinaryProvider()
     inMemoryTransactionsRepository = new InMemoryTransactionsRepository()
-
+    
     listByClientUsecase = new ListCNABTransactionsByClientUsecase(inMemoryTransactionsRepository)
 
     registerUsecase = new RegisterCNABTransactionsUsecase(

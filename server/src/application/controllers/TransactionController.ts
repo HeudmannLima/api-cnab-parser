@@ -3,24 +3,51 @@ import { RegisterCNABTransactionsUsecase } from '@src/application/usecases/regis
 import { TransactionsRepository } from '@src/application/http/repositories/TransactionsRepository'
 import { ListCNABTransactionsUsecase } from '@src/application/usecases/list-all-transactions'
 import { ListResumeCNABTransactionsUsecase } from '@src/application/usecases/list-all-resume-transactions'
-import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBase64Provider'
+import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBinaryProvider'
 import { ListCNABTransactionsByClientUsecase } from '@src/application/usecases/list-transactions-by-client'
 import { ListResumeCNABTransactionsByClientUsecase } from '@src/application/usecases/list-resume-by-client'
 import { AppError } from '@src/http/errors/AppError'
+import { RegisterCNABTransactionsByUploadUsecase } from '../usecases/register-uploaded-file-transactions'
 
 export default class TransactionController {
 
   public async register(request: Request, response: Response): Promise<Response> {
     const { fileData } = request.body 
-    const registerTransaction = new RegisterCNABTransactionsUsecase(new TransactionsRepository(), new ReadBinaryProvider())
+
+    const registerTransaction = new RegisterCNABTransactionsUsecase(
+      new TransactionsRepository(), 
+      new ReadBinaryProvider()
+    )
 
     try {
       await registerTransaction.execute(fileData)
 
-      return response.status(200).json({ message: `CNAB Data saved with success.`});
+      return response.status(200).json({ message: `CNAB Data registered with success.`});
     } catch (error) {
       throw new AppError(`Error on registrer CNAB transactions. ${error}`)
     }
+  }
+
+  public async registerFile(request: Request, response: Response): Promise<Response> {
+    const registerUploadTransaction = new RegisterCNABTransactionsByUploadUsecase(
+      new TransactionsRepository(), 
+      new ReadBinaryProvider()
+    )
+
+    const file: Express.Multer.File = request?.file!
+
+    if (!file || !file.originalname.endsWith('.txt') || !file.mimetype.includes('text/plain')) {
+      return response.status(400).json(`Error on registrer CNAB transactions from an invalid file data.`)
+    }
+
+    try {
+      await registerUploadTransaction.execute(file.path)
+
+    } catch (error) {
+      throw new AppError(`Error on registrer CNAB transactions from file. ${error}`)
+    }
+
+    return response.status(200).json({ message: `CNAB file data registered with success.`})
   }
 
   public async listAll(_request: Request, response: Response): Promise<Response> {

@@ -1,4 +1,4 @@
-import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBase64Provider'
+import { ReadBinaryProvider } from '@src/providers/ReadBinaryProvider/implementations/ReadBinaryProvider'
 import { InMemoryTransactionsRepository } from '@src/tests/repositories/in-memory-transactions-repository'
 import { ListResumeCNABTransactionsByClientUsecase } from '@src/application/usecases/list-resume-by-client'
 import { ListCNABTransactionsByClientUsecase } from '@src/application/usecases/list-transactions-by-client'

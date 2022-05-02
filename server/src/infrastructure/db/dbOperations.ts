@@ -9,53 +9,53 @@ export class DbOperations {
   }
 
   async selectAllCNABs(): Promise<CNABdata[]> {
-    let result: QueryResult<CNABdata> = {} as any
+    let result: QueryResult<CNABdata>
     const client: PoolClient | undefined = await LoadPostgresDriver.connectToDB()
 
     try {
       const sql = `SELECT * FROM transactions`
-      result = await client!.query(sql)
+      result = await client.query(sql)
 
     } catch (err) {
       console.warn(`Transaction error: `, err)
 
     } finally {
-      client!.release()
+      client.release()
     }
 
-    return result.rows
+    return result!.rows
   }
 
   async selectCNABsByClient(clientName: string): Promise<CNABdata[]> {
-    let result: QueryResult<CNABdata> = {} as any
+    let result: QueryResult<CNABdata>
     const client: PoolClient | undefined = await LoadPostgresDriver.connectToDB()
 
     try {
       const sql = `SELECT * FROM transactions WHERE client = $1;`
-      result = await client!.query(sql, [clientName])
+      result = await client.query(sql, [clientName])
 
     } catch (err) {
       console.warn(`Transaction error: `, err)
 
     } finally {
-      client!.release()
+      client.release()
     }
 
-    return result.rows
+    return result!.rows
   }
 
-  async insertCNABDataArray(cnabArray: TransactionData[]) {    
-    const client: PoolClient | undefined = await LoadPostgresDriver.connectToDB()
+  async insertCNABDataArray(cnabArray: TransactionData[]) {
+    const client: PoolClient = await LoadPostgresDriver.connectToDB()
   
     try {
-      await client!.query(`BEGIN`)
+      await client.query(`BEGIN`)
   
       try {
         const sql= `INSERT INTO transactions (
           id, type, date, amount, cpf, card, time, owner, client
         ) VALUES (
           $1, $2, $3, $4, $5, $6, $7, $8, $9
-        );`
+        ) RETURNING *;`
   
         for (const data of cnabArray) {
           const props = { ...data.properties }
@@ -71,23 +71,24 @@ export class DbOperations {
             props.client
           ]
 
-          client!.query(sql, values, (err, _result) => {
-            if (err) {              
-              client!.query(`ROLLBACK`)
-              console.warn(`Transaction ROLLBACK called - Error: `, err)
+           client.query(sql, values, (err, _result) => {
+            if (err) {
+              client.query(`ROLLBACK`)
+              console.warn(`Transaction ROLLBACK called: `, err)
             } else {
-              client!.query(`COMMIT`)
+              client.query(`COMMIT`)
             }
           })
         }
 
       } catch (err) {
-        client!.query(`ROLLBACK`)
-        console.warn(`Transaction ROLLBACK called - Error: `, err)
+        client.query(`ROLLBACK`)
+        console.warn(`Transaction ROLLBACK called: `, err)
       }
-  
+
     } finally {
-      client!.release()
+      client.release()
     }
   }
 }
+
