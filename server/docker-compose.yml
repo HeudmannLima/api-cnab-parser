@@ -11,6 +11,7 @@ services:
       - db
     volumes:
       - .:/usr/src/app
+    command: "npm run dev"
 
   db:
     container_name: postgresdb
