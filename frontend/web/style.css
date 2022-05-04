@@ -1,0 +1,50 @@
+body {
+  background-color: rgb(249, 249, 189);
+}
+
+.container {
+  max-width: 500px;
+  margin: 40px auto;
+}
+.container h1 {
+  text-align: center;
+  color: white;
+}
+
+table,
+th,
+td {
+  border: 0.5px solid;
+  background-color: white;
+  padding: 3px;
+}
+
+.submit-btn1 {
+  width: 100%;
+  background: rgb(37, 83, 3);
+  font-size: 18px;
+  color: white;
+  border-radius: 3px;
+  padding: 18px;
+  text-align: center;
+}
+
+.submit-btn2 {
+  width: 100%;
+  background: rgb(64, 134, 14);
+  font-size: 18px;
+  color: white;
+  border-radius: 3px;
+  padding: 18px;
+  text-align: center;
+}
+
+.submit-btn3 {
+  width: 100%;
+  background: rgb(90, 185, 22);
+  font-size: 18px;
+  color: white;
+  border-radius: 3px;
+  padding: 18px;
+  text-align: center;
+}

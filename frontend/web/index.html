@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>CNAB Parser</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1 style="color: #000; background-color:powderblue;">Importe abaixo o arquivo CNAB (.txt) para Registar e obter as transações detalhadas.</h1>
+    <br>
+    <input type="file" id="fileInput">
+    <br><br>
+    <button class="submit-btn1" id="uploadButton">Importar Arquivo</button>
+  </div>
+
+  <div class="container">
+    <button class="submit-btn2" id="getDataButton">Listar Registros atuais</button>
+  </div>
+
+  <div class="container">
+    <button class="submit-btn3" id="clearListButton">Limpar registros da tela</button>
+  </div>
+  <hr/><br>
+  <center>
+    <h1>1. Saldo total das Operações por Cliente<span id="totalR"></span>:</h1>
+    <table style="background-color:powderblue;" id="resume-table"></table>
+    <br><br>
+    <h1>2. Todas as Transações<span id="totalT"></span>:</h1>
+    <table style="background-color:powderblue;" id="transactions-table"></table>
+    <br><br>
+  </center>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

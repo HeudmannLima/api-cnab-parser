@@ -1,85 +1,127 @@
-# Desafio programação - para vaga desenvolvedor
+<br>
 
-Por favor leiam este documento do começo ao fim, com muita atenção. 
-O intuito deste teste é avaliar seus conhecimentos técnicos em programação.
-O teste consiste em parsear [este arquivo de texto(CNAB)](https://github.com/ByCodersTec/desafio-ruby-on-rails/blob/master/CNAB.txt) e salvar suas informações(transações financeiras) em uma base de dados a critério do candidato.
-Este desafio deve ser feito por você em sua casa. Gaste o tempo que você quiser, porém normalmente você não deve precisar de mais do que algumas horas.
+# <center> 💳  CNAB Parser API  💳</center> 
 
-# Instruções de entrega do desafio
+<center>
 
-1. Primeiro, faça um fork deste projeto para sua conta no Github (crie uma se você não possuir).
-2. Em seguida, implemente o projeto tal qual descrito abaixo, em seu clone local.
-3. Por fim, envie via email o projeto ou o fork/link do projeto para seu contato Bycoders_ com cópia para rh@bycoders.com.br.
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
+![Prerequisite](https://img.shields.io/badge/npm-%3E%3D5.5.0-blue.svg)
+![Prerequisite](https://img.shields.io/badge/node-%3E%3D10.0.0-blue.svg)
+![Prerequisite](https://img.shields.io/badge/docker-%3E%3D15.0.0-blue.svg)
+![Prerequisite](https://img.shields.io/badge/dockercompose-%3E%3D1.0.0-blue.svg)
+[![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](http://localhost:3333/docs)
+</center>
 
-# Descrição do projeto
 
-Você recebeu um arquivo CNAB com os dados das movimentações finanaceira de várias lojas.
-Precisamos criar uma maneira para que estes dados sejam importados para um banco de dados.
+> CNAB Parser API é uma aplicação que tem como features o Upload de um arquivo CNAB via(.txt) ou via String Base64, que faz o parser, normaliza os dados e os armazena em um banco de dados relacional, para serem consultados de formas individuais (transações por cliente) ou listando todas as transações registradas, com um totalizador do saldo conforme suas operações.
 
-Sua tarefa é criar uma interface web que aceite upload do [arquivo CNAB](https://github.com/ByCodersTec/desafio-ruby-on-rails/blob/master/CNAB.txt), normalize os dados e armazene-os em um banco de dados relacional e exiba essas informações em tela.
+<br>
 
-**Sua aplicação web DEVE:**
+## Features e Ferramentas:
 
-1. Ter uma tela (via um formulário) para fazer o upload do arquivo(pontos extras se não usar um popular CSS Framework )
-2. Interpretar ("parsear") o arquivo recebido, normalizar os dados, e salvar corretamente a informação em um banco de dados relacional, **se atente as documentações** que estão logo abaixo.
-3. Exibir uma lista das operações importadas por lojas, e nesta lista deve conter um totalizador do saldo em conta
-4. Ser escrita na sua linguagem de programação de preferência
-5. Ser simples de configurar e rodar, funcionando em ambiente compatível com Unix (Linux ou Mac OS X). Ela deve utilizar apenas linguagens e bibliotecas livres ou gratuitas.
-6. Git com commits atomicos e bem descritos
-7. PostgreSQL, MySQL ou SQL Server
-8. Ter testes automatizados
-9. Docker compose (Pontos extras se utilizar)
-10. Readme file descrevendo bem o projeto e seu setup
-11. Incluir informação descrevendo como consumir o endpoint da API
+- Server Backend (`Node.JS`) 
+- BD (`Postgres`)
+- Tests (`Jest`)
+- Server Frontend (`Nginx`) 
+- Docs (`Swagger`)
 
-**Sua aplicação web não precisa:**
+### - API
 
-1. Lidar com autenticação ou autorização (pontos extras se ela fizer, mais pontos extras se a autenticação for feita via OAuth).
-2. Ser escrita usando algum framework específico (mas não há nada errado em usá-los também, use o que achar melhor).
-3. Documentação da api.(Será um diferencial e pontos extras se fizer)
+>- Upload de CNAB (.txt) via multipart-form - POST
+>- Processamento dos dados do arquivo CNAB (.txt) via String Base64 - POST
+>- Lista de todas as Transações de todos os clientes - GET
+>- Lista Transações por Nome do Cliente  - GET
+>- Lista do Saldo total das operações das Transações de todos os clientes  - GET
+>- Lista do Saldo total das operações das Transações por Nome do Cliente  - GET
 
-# Documentação do CNAB
+### - Web Server
 
-| Descrição do campo  | Inicio | Fim | Tamanho | Comentário
-| ------------- | ------------- | -----| ---- | ------
-| Tipo  | 1  | 1 | 1 | Tipo da transação
-| Data  | 2  | 9 | 8 | Data da ocorrência
-| Valor | 10 | 19 | 10 | Valor da movimentação. *Obs.* O valor encontrado no arquivo precisa ser divido por cem(valor / 100.00) para normalizá-lo.
-| CPF | 20 | 30 | 11 | CPF do beneficiário
-| Cartão | 31 | 42 | 12 | Cartão utilizado na transação 
-| Hora  | 43 | 48 | 6 | Hora da ocorrência atendendo ao fuso de UTC-3
-| Dono da loja | 49 | 62 | 14 | Nome do representante da loja
-| Nome loja | 63 | 81 | 19 | Nome da loja
+>- Serviço Http (nginx) em http://localhost:8080
 
-# Documentação sobre os tipos das transações
+### - Documentação
 
-| Tipo | Descrição | Natureza | Sinal |
-| ---- | -------- | --------- | ----- |
-| 1 | Débito | Entrada | + |
-| 2 | Boleto | Saída | - |
-| 3 | Financiamento | Saída | - |
-| 4 | Crédito | Entrada | + |
-| 5 | Recebimento Empréstimo | Entrada | + |
-| 6 | Vendas | Entrada | + |
-| 7 | Recebimento TED | Entrada | + |
-| 8 | Recebimento DOC | Entrada | + |
-| 9 | Aluguel | Saída | - |
+>- Swagger Docs em http://localhost:3333/docs
 
-# Avaliação
 
-Seu projeto será avaliado de acordo com os seguintes critérios.
+<br>
 
-1. Sua aplicação preenche os requerimentos básicos?
-2. Você documentou a maneira de configurar o ambiente e rodar sua aplicação?
-3. Você seguiu as instruções de envio do desafio?
-4. Qualidade e cobertura dos testes unitários.
+## Pré-requisitos
 
-Adicionalmente, tentaremos verificar a sua familiarização com as bibliotecas padrões (standard libs), bem como sua experiência com programação orientada a objetos a partir da estrutura de seu projeto.
+- npm >= 5.5.0
+- node >= 10.0.0
+- docker >= 15.0.0
+- docker-compose >= 1.0.0
 
-# Referência
+<br>
 
-Este desafio foi baseado neste outro desafio: https://github.com/lschallenges/data-engineering
+## Instalação
 
----
+```sh
+git clone https://github.com/HeudmannLima/cnab-parser-api.git
+```
 
-Boa sorte!
+## ⚠️ Como executar
+Após fazer o clone, acesse a pasta `/server` dentro do projeto `/cnab-parser-api`:
+
+```
+cd cnab-parser-api
+cd server
+docker-compose up
+```
+
+## Execução de Testes
+
+Dentro da pasta `/server` dentro do projeto `/cnab-parser-api`:
+
+```sh
+npm test
+```
+
+## Frontend
+
+Automaticamente o Web Server `NGINX` será disponibilizado em:
+
+```sh
+http://localhost:8080
+```
+
+## Documentação
+
+Automaticamente a Documentação `Swagger` será disponibilizada em:
+
+```sh
+http://localhost:3333/docs
+```
+
+## ⚠️ Informações Adicionais
+
+O arquivo `CNAB.txt` exemplo com o formato correto está na pasta RAIZ do projeto:
+
+```sh
+/cnab-parser-api/CNAB.txt
+```
+Anexe para uso tanto via Requisição `POST` pelo `Swagger`, quanto anexar na página `Http`.
+
+
+<br>
+
+## 🤝 Dados do Autor
+
+👤 **Heudmann O. Lima**
+
+* LinkedIn: https://www.linkedin.com/in/heudmann/
+* Github: [@HeudmannLima](https://github.com/HeudmannLima)
+* Contatos: [heudmannlima@gmail.com](heudmannlima@gmail.com)
+* Telefone: (92) 99403-9118
+
+<br>
+
+## 📝 License
+
+Copyright © 2022 [Heudmann O. Lima](https://github.com/HeudmannLima).
+
+This project is [(MIT)](https://github.com/kefranabg/readme-md-generator/blob/master/LICENSE) licensed.
+
+***
+
+<br>
