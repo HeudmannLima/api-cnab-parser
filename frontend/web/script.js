@@ -37,7 +37,7 @@ const geAllResumeTransactionsData = async () => {
 
 async function listAllData(formData) {  
   await postData(formData);
-  listData()
+  alert('Arquivos importados com Sucesso, clique em Listar para visualizar os registros inseridos.');
 }
 
 function clearTables() {

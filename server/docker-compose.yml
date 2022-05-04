@@ -1,12 +1,6 @@
 version: '3.8'
+
 services:
-  client:
-    image: nginx
-    ports:
-      - 8000:80
-    volumes:
-      - .:/usr/share/nginx/html
-  
   api:
     container_name: api
     restart: always
@@ -29,7 +23,7 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
 
-  web:
+  client:
     extends:
       file: ../frontend/docker-compose.yml
       service: client
