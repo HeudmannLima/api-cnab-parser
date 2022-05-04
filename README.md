@@ -1,6 +1,9 @@
 <br>
 
-# <center> 💳  CNAB Parser API  💳</center> 
+
+<p align="center">
+  💳  CNAB Parser API  💳
+</p>
 
 <center>
 
@@ -13,7 +16,7 @@
 </center>
 
 
-> CNAB Parser API é uma aplicação que tem como features o Upload de um arquivo CNAB via(.txt) ou via String Base64, que faz o parser, normaliza os dados e os armazena em um banco de dados relacional, para serem consultados de formas individuais (transações por cliente) ou listando todas as transações registradas, com um totalizador do saldo conforme suas operações.
+> CNAB Parser API é uma aplicação que tem como features o Upload de um arquivo CNAB via (.txt) ou via String Base64, que faz o parser do arquivo, normaliza os dados e os armazena em um banco de dados relacional para serem consultados de formas individuais (transações por cliente) ou listando todas as transações registradas, com um totalizador do saldo conforme suas operações.
 
 <br>
 
