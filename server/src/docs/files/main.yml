@@ -51,19 +51,13 @@ paths:
           multipart/form-data:
             schema:
               type: object
-              properties: # Request parts
+              properties:
                 file:
                   type: string
                   format: base64
-            encoding: # The same level as schema
-              file: # Property name (see above)
+            encoding:
+              file:
                 contentType: text/plain
-        # required: true
-        # description: Base64 string
-        # content:
-        #   application/json:
-        #     schema:
-        #       $ref: '#/components/schemas/RegisterRequest'
       responses:
         200:
           description: Success
