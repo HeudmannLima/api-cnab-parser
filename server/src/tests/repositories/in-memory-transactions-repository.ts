@@ -1,6 +1,6 @@
 import { CNABdata, TransactionData } from '@src/domain/entities/transactionData'
 import { ITransactionsRepository } from '@src/application/repositories/ITransactionsRepository'
-import { randomUUID } from 'crypto'
+import { v4 } from 'uuid'
 
 export class InMemoryTransactionsRepository implements ITransactionsRepository {
   private transactions: CNABdata[] = []
@@ -9,7 +9,7 @@ export class InMemoryTransactionsRepository implements ITransactionsRepository {
     const createdResponse: CNABdata[] = []
 
     for (const data of cnabArray) {
-      const cnab: CNABdata = { id: randomUUID(), ...data.properties }
+      const cnab: CNABdata = { id: v4(), ...data.properties }
       this.transactions.push(cnab)
       createdResponse.push(cnab)
     }
