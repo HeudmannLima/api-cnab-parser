@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/http/server.ts",
     "build": "tsc",
-    "test": "jest --coverage"
+    "test": "jest --coverage --verbose"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
