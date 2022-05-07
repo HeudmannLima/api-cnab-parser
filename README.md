@@ -76,10 +76,10 @@ docker-compose up
 
 ## Execução de Testes
 
-Dentro da pasta `/server` dentro do projeto `/cnab-parser-api`:
+Na da pasta `/server` dentro do projeto `/cnab-parser-api`:
 
 ```sh
-npm test
+docker-compose run --rm api npm test
 ```
 
 ## Frontend
