@@ -11,6 +11,7 @@ dotenv.config()
 loadDatabase()
 
 const port = Number(process.env.PORT)
+const webPort = Number(process.env.WEB_PORT)
 const app = express()
 
 app.use(cors())
@@ -31,5 +32,6 @@ app.use((err: Error, _request: Request, response: Response, _: NextFunction) => 
 
 app.listen(port, () => {
   console.warn(`\n[✔] Server Started on port ${port}`)
+  console.warn(`[✔] Frontend available at http://localhost:8080`)
   swaggerDocs(app, port)
 })

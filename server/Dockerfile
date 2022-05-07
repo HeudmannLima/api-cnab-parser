@@ -1,17 +1,13 @@
-FROM node:16.13.1-alpine3.14
+FROM node:alpine
 
 WORKDIR /usr/src/app
 
-COPY ["package.json", "package-lock.json", "tsconfig.json", ".env", "./"]
+COPY package*.json ./
 
 RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 3333
 
-COPY ./entrypoint.sh /entrypoint.sh
-
-RUN chmod +x /entrypoint.sh
-
-ENTRYPOINT [ "/entrypoint.sh" ]
+CMD ["npm", "run", "dev"]

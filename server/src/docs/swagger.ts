@@ -30,5 +30,5 @@ export function swaggerDocs(app: Express, port: number) {
     response.send(swaggerSpec)
   })
 
-  console.warn(`[✔] Docs available at http://localhost:${port}/docs`)
+  console.warn(`[✔] Docs available at http://localhost:${port}/docs \n`)
 }

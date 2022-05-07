@@ -4,13 +4,12 @@ services:
   api:
     container_name: api
     restart: always
-    build: .
+    build:
+      context: ./
     ports:
       - ${PORT}:${PORT}
     depends_on:
       - db
-    volumes:
-      - .:/usr/src/app
 
   db:
     container_name: postgresdb
