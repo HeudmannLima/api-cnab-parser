@@ -52,10 +52,10 @@
 
 ## Pré-requisitos
 
-- npm >= 5.5.0
-- node >= 10.0.0
-- docker >= 15.0.0
-- docker-compose >= 1.0.0
+- [node](https://nodejs.org/en/download/) >= 10.0.0
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) >= 5.5.0
+- [docker](https://docs.docker.com/get-docker) >= 15.0.0
+- [docker-compose](https://docs.docker.com/compose/install) >= 1.0.0
 
 <br>
 
@@ -117,7 +117,7 @@ Anexe para uso tanto via Requisição `POST` pelo `Swagger`, quanto anexar na p�
 * LinkedIn: https://www.linkedin.com/in/heudmann/
 * Github: [@HeudmannLima](https://github.com/HeudmannLima)
 * Contatos: [heudmannlima@gmail.com](heudmannlima@gmail.com)
-* Telefone: (92) 99403-9118
+* Telefone: (92) 99403-9117
 
 <br>
 
